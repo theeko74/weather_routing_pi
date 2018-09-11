@@ -2697,12 +2697,10 @@ CursorPositionDialog::~CursorPositionDialog()
 
 RoutePositionDialog::RoutePositionDialog( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
 {
-	this->SetSizeHints( wxSize( 400,-1 ), wxDefaultSize );
+	this->SetSizeHints( wxSize( -1,-1 ), wxDefaultSize );
 	
-	wxFlexGridSizer* fgSizer90;
-	fgSizer90 = new wxFlexGridSizer( 0, 1, 0, 0 );
-	fgSizer90->SetFlexibleDirection( wxBOTH );
-	fgSizer90->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	wxBoxSizer* bSizer3;
+	bSizer3 = new wxBoxSizer( wxVERTICAL );
 	
 	wxFlexGridSizer* fgSizer91;
 	fgSizer91 = new wxFlexGridSizer( 0, 2, 0, 0 );
@@ -2823,18 +2821,12 @@ RoutePositionDialog::RoutePositionDialog( wxWindow* parent, wxWindowID id, const
 	fgSizer91->Add( m_stWeatherData, 0, wxALL|wxEXPAND, 5 );
 	
 	
-	fgSizer90->Add( fgSizer91, 1, wxEXPAND, 5 );
-	
-	m_sdbSizer5 = new wxStdDialogButtonSizer();
-	m_sdbSizer5OK = new wxButton( this, wxID_OK );
-	m_sdbSizer5->AddButton( m_sdbSizer5OK );
-	m_sdbSizer5->Realize();
-	
-	fgSizer90->Add( m_sdbSizer5, 1, wxEXPAND, 5 );
+	bSizer3->Add( fgSizer91, 1, wxEXPAND, 5 );
 	
 	
-	this->SetSizer( fgSizer90 );
+	this->SetSizer( bSizer3 );
 	this->Layout();
+	bSizer3->Fit( this );
 	
 	this->Centre( wxBOTH );
 }

@@ -517,10 +517,22 @@ static void RoutePositionDialogMessage(RoutePositionDialog &dlg, wxString msg)
 {
     dlg.m_stPosition->SetLabel(msg);
     dlg.m_stPosition->Fit();
+    
     dlg.m_stTime->SetLabel(_T(""));
+    dlg.m_stDuration->SetLabel(_T(""));
+
     dlg.m_stPolar->SetLabel(_T(""));
     dlg.m_stSailChanges->SetLabel(_T(""));
     dlg.m_stTacks->SetLabel(_T(""));
+    
+    dlg.m_stBoatSpeed->SetLabel(_T(""));
+    dlg.m_stTWS->SetLabel(_T(""));
+    dlg.m_stTWA->SetLabel(_T(""));
+    dlg.m_stAWS->SetLabel(_T(""));
+    dlg.m_stAWA->SetLabel(_T(""));
+    dlg.m_stWaves->SetLabel(_T(""));
+    dlg.m_stWindGust->SetLabel(_T(""));
+
     dlg.m_stWeatherData->SetLabel(_T(""));
     dlg.Fit();
 }
@@ -612,7 +624,7 @@ void WeatherRouting::UpdateRoutePositionDialog()
     RouteMapOverlay *rmo = currentroutemaps.front();
     Position *p = rmo->GetLastCursorPosition();
     if(!p) {
-        RoutePositionDialogMessage(dlg, _("Cursor outside computed route map"));
+        RoutePositionDialogMessage(dlg, _("Cursor outside computed route"));
         return;
     }
     wxDateTime display_time = rmo->GetLastCursorTime();
@@ -988,6 +1000,9 @@ void WeatherRouting::OnWeatherRouteSelected( )
     UpdateDialogs();
 
     SetEnableConfigurationMenu();
+    
+    // Reset pointer if a new route is selected
+    m_positionOnRoute = NULL;
 }
 
 void WeatherRouting::OnWeatherRouteKeyDown( wxListEvent& event )
